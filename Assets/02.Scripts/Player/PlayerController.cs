@@ -15,6 +15,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float m_JumpPower = 80f; //점프
 
+    [Header("시선")]
+    [SerializeField]
+    private Transform m_CameraContainer;
+    private float m_MinXLook = -3f;  // 최소 시야각
+    private float m_MaxXLook = 3.0f;  // 최대 시야각
+    private float m_CamCurXRot; //현재카메라
+    private float m_lookSensitivity = 0.1f; // 카메라 민감도
+
+    private Vector2 mouseDelta;  // 마우스 변화값
 
     private Rigidbody m_Rigidbody;
     private Animator m_Animator;
@@ -25,14 +34,16 @@ public class PlayerController : MonoBehaviour
         m_Animator = GetComponentInChildren<Animator>();
 
         m_Rigidbody.drag = m_Drag;
-
-        Application.targetFrameRate = 60;
     }
-
 
     private void FixedUpdate()
     {
         Move();
+    }
+
+    private void LateUpdate()
+    {
+        CameraLook();
     }
 
     //플레이어 이동
@@ -47,7 +58,6 @@ public class PlayerController : MonoBehaviour
             m_Rigidbody.AddForce(movement * m_Acceleration, ForceMode.Acceleration);
         }
     }
-
 
     //플레이어 이동 입력
     public void OnMove(InputAction.CallbackContext context)
@@ -68,5 +78,18 @@ public class PlayerController : MonoBehaviour
         {
             m_Rigidbody.AddForce(Vector2.up * m_JumpPower, ForceMode.Impulse);
         }
+    }
+
+    public void OnLookInput(InputAction.CallbackContext context)
+    {
+        mouseDelta = context.ReadValue<Vector2>();
+    }
+
+    private void CameraLook()
+    {
+        m_CamCurXRot += mouseDelta.y * m_lookSensitivity;
+        m_CamCurXRot = Mathf.Clamp(m_CamCurXRot, m_MinXLook, m_MaxXLook);
+        m_CameraContainer.localEulerAngles = new Vector3(-m_CamCurXRot, 0, 0);
+        transform.eulerAngles += new Vector3(0, mouseDelta.x * m_lookSensitivity, 0);
     }
 }
