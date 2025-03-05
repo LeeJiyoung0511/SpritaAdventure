@@ -11,11 +11,8 @@ public class Interaction : MonoBehaviour
     private IInteractable m_CheckItem; // 감지한 아이템
     public Action<IInteractable> OnCheckItemEvent = delegate { }; // 아이템 감지 이벤트
 
-    private GameManager m_GameManager;
-
     private void Start()
     {
-        m_GameManager = GameManager.Instance;
         StartCoroutine(ICheckItem());
     }
 
