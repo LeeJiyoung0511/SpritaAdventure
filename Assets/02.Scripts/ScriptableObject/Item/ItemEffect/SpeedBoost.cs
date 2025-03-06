@@ -7,11 +7,11 @@ public class SpeedBoost : ItemEffect
 
     public override void StartEffect(Player player)
     {
-        player.Controller.MaxSpeed += AddSpeed;
+        player.Controller.MoveSpeed += AddSpeed;
     }
 
     public override void EndEffect(Player player)
     {
-        player.Controller.MaxSpeed = -AddSpeed;
+        player.Controller.MoveSpeed = -AddSpeed;
     }
 }

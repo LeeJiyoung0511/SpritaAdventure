@@ -1,26 +1,15 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    public float CurrentHp
-    {
-        get => m_CurrentHp;
-        set
-        {
-            m_CurrentHp = value;
-            OnChangedHpEvent?.Invoke(m_CurrentHp);
-        }
-    }
+    public float MaxHp;
+    public float MaxStamina;
 
-    private float m_CurrentHp;
+    public Condition Hp;
+    public Condition Stamina;
 
-    public float MaxHp = 100;
-
-    public Action<float> OnChangedHpEvent = delegate { };
-
-    public bool IsDead => CurrentHp == 0;
+    public bool IsDead => Hp.Current == 0;
 
     private GameManager m_GameManager;
 
@@ -35,24 +24,39 @@ public class Player : MonoBehaviour
         Interaction = GetComponent<Interaction>();
         Controller = GetComponent<PlayerController>();
         Inventory = GetComponent<Inventory>();
+
+        Hp = new(MaxHp);
+        Stamina = new(MaxStamina);
     }
 
     private void Start()
     {
-        m_CurrentHp = MaxHp;
         m_GameManager.UIManager.HPBar.Set(MaxHp);
+        m_GameManager.UIManager.StaminaBar.Set(MaxStamina);
+    }
+
+    private void Update()
+    {
+        if (Controller.IsDash)
+        {
+            Stamina.Subtract(Time.deltaTime * 5f);
+        }
+        else
+        {
+            Stamina.Add(Time.deltaTime);
+        }
     }
 
     //체력회복
     public void Heal(float amount)
     {
-        CurrentHp = Mathf.Min(CurrentHp + amount, MaxHp);        
+        Hp.Add(amount);       
     }
 
     //체력감소
     public void Damage(float amount)
     {
-        CurrentHp = Mathf.Max(CurrentHp - amount, 0);
+        Hp.Subtract(amount);
     }
 
     //아이템 사용

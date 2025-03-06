@@ -4,7 +4,9 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public HPBar HPBar;
-    public TextMeshProUGUI ItemInfoText;
+    public StaminaBar StaminaBar;
+    [SerializeField]
+    private TextMeshProUGUI m_ItemInfoText;
     [SerializeField]
     private PickUpItemIcon m_PickUpItemIcon;
 
@@ -18,10 +20,10 @@ public class UIManager : MonoBehaviour
     {
         bool isShow = item != null;
 
-        ItemInfoText.gameObject.SetActive(isShow);
+        m_ItemInfoText.gameObject.SetActive(isShow);
         if (isShow)
         {
-            ItemInfoText.text = item.GetItemInfo();
+            m_ItemInfoText.text = item.GetItemInfo();
         }
     }
 

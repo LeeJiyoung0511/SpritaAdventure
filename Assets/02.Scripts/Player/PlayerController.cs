@@ -4,15 +4,18 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("이동")]
-    public float Drag;          //감속 (마찰력)
-    public float Acceleration; // 가속도
-    public float MaxSpeed;      //최대 이동 속도
+    public float MoveSpeed;      //이동 속도
+    public float DashAddSpeed = 10.0f; //대쉬중일때 더할 속도값
     private Vector2 m_MovementInput;   //입력받은 이동값
+    private bool IsMove = false; // 이동중인지
+    public bool IsDash = false; // 대쉬중인지
 
     [Header("점프")]
     public float JumpPower = 100f; //점프
     [SerializeField]
     private LayerMask m_GroundMask;
+    [SerializeField]
+    private LayerMask m_WallMask;
 
     [Header("시선")]
     [SerializeField]
@@ -21,7 +24,6 @@ public class PlayerController : MonoBehaviour
     private float m_MaxXLook = 3.0f;  // 최대 시야각
     private float m_CamCurXRot; //현재카메라
     private float m_lookSensitivity = 0.1f; // 카메라 민감도
-
     private Vector2 mouseDelta;  // 마우스 변화값
 
     private Rigidbody m_Rigidbody;
@@ -31,8 +33,6 @@ public class PlayerController : MonoBehaviour
     {
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Animator = GetComponentInChildren<Animator>();
-
-        m_Rigidbody.drag = Drag;
     }
 
     private void FixedUpdate()
@@ -48,14 +48,10 @@ public class PlayerController : MonoBehaviour
     //플레이어 이동
     private void Move()
     {
-        //이동속도 일정하게 유지
-        Vector3 movement = new Vector3(m_MovementInput.x, 0, m_MovementInput.y).normalized;
-
-        // 현재 속도가 maxSpeed 이상이면 힘을 추가하지 않음
-        if (m_Rigidbody.velocity.magnitude < MaxSpeed)
-        {
-            m_Rigidbody.AddForce(movement * Acceleration, ForceMode.Acceleration);
-        }
+        Vector3 dir = (transform.forward * m_MovementInput.y + transform.right * m_MovementInput.x).normalized;
+        dir *= MoveSpeed;
+        dir.y = m_Rigidbody.velocity.y;
+        m_Rigidbody.velocity = dir;
     }
 
     //플레이어 이동 입력
@@ -64,18 +60,24 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Performed)
         {
             m_MovementInput = context.ReadValue<Vector2>();
+            IsMove = true;
         }
         else if (context.phase == InputActionPhase.Canceled)
         {
             m_MovementInput = Vector2.zero;
+            IsMove = false;
         }
     }
 
+    //점프
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started && IsCheckDown(m_GroundMask))
+        if (context.phase == InputActionPhase.Started)
         {
-            m_Rigidbody.AddForce(Vector2.up * JumpPower, ForceMode.Impulse);
+            if (IsCheckDown(m_GroundMask))
+            {
+                m_Rigidbody.AddForce(Vector2.up * JumpPower, ForceMode.Impulse);
+            }
         }
     }
 
@@ -92,6 +94,7 @@ public class PlayerController : MonoBehaviour
         transform.eulerAngles += new Vector3(0, mouseDelta.x * m_lookSensitivity, 0);
     }
 
+    //아래쪽 체크
     public bool IsCheckDown(LayerMask layerMask)
     {
         Ray[] rays = new Ray[2]
@@ -108,5 +111,20 @@ public class PlayerController : MonoBehaviour
             }
         }
         return false;
+    }
+
+    //대쉬
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed && !IsDash && IsMove)
+        {
+            IsDash = true;
+            MoveSpeed += DashAddSpeed;
+        }
+        else if (context.phase == InputActionPhase.Canceled && IsMove)
+        {
+            IsDash = false;
+            MoveSpeed -= DashAddSpeed;
+        }
     }
 }
