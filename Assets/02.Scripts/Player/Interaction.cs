@@ -6,7 +6,7 @@ public class Interaction : MonoBehaviour
 {
     public LayerMask m_InteractionLayer; // 감지할 레이어
 
-    private float m_MaxCheckDistance = 5f; // 레이의 최대 감지 거리
+    private float m_MaxCheckDistance = 0.5f; // 레이의 최대 감지 거리
     private GameObject m_CheckObject; // 감지한 물체
     private IInteractable m_CheckItem; // 감지한 아이템
     public Action<IInteractable> OnCheckItemEvent = delegate { }; // 아이템 감지 이벤트
@@ -30,7 +30,7 @@ public class Interaction : MonoBehaviour
         //레이를 쏠 위치 설정
         Vector3 rayPos = transform.position + Vector3.up * 0.35f; 
         //레이의 감지 범위 설정
-        float sphereRadius = 0.3f;
+        float sphereRadius = 0.25f;
         Ray ray = new Ray(rayPos, transform.forward);
         //레이 표시
         Debug.DrawLine(ray.origin, ray.origin + ray.direction * m_MaxCheckDistance, Color.red);
