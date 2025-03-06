@@ -8,10 +8,12 @@ public class SpeedBoost : ItemEffect
     public override void StartEffect(Player player)
     {
         player.Controller.MoveSpeed += AddSpeed;
+        Debug.Log("속도 증가");
     }
 
     public override void EndEffect(Player player)
     {
-        player.Controller.MoveSpeed = -AddSpeed;
+        player.Controller.MoveSpeed -= AddSpeed;
+        Debug.Log("속도 복귀");
     }
 }
