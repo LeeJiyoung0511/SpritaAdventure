@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour
 
     public Interaction Interaction { get; private set; }
     public PlayerController Controller { get; private set; }
+    public Inventory Inventory { get; private set; }
 
     private void Awake()
     {
@@ -32,6 +34,7 @@ public class Player : MonoBehaviour
         m_GameManager.Player = this;
         Interaction = GetComponent<Interaction>();
         Controller = GetComponent<PlayerController>();
+        Inventory = GetComponent<Inventory>();
     }
 
     private void Start()
@@ -50,5 +53,14 @@ public class Player : MonoBehaviour
     public void Damage(float amount)
     {
         CurrentHp = Mathf.Max(CurrentHp - amount, 0);
+    }
+
+    //아이템 사용
+    public void OnUse(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started )
+        {
+            Inventory.Use(this);
+        }
     }
 }

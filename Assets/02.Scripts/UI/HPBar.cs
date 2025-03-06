@@ -5,11 +5,6 @@ public class HPBar : MonoBehaviour
 {
     private Slider m_HpBar;
 
-    private void Awake()
-    {
-        GameManager.Instance.UIManager.HPBar = this;
-    }
-
     private void Start()
     {
         m_HpBar = GetComponent<Slider>();

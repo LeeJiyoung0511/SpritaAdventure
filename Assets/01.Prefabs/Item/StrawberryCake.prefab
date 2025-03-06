@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d34f86290ac9be45881834180cf2ade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ItemData: {fileID: 11400000, guid: ff4b8fb49994c5046bb2dbb5d5810bf1, type: 2}
+  ItemData: {fileID: 11400000, guid: ff4b8fb49994c5046bb2dbb5d5810bf1, type: 2}
 --- !u!135 &8999967551648714819
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -145,7 +145,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

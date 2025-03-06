@@ -3,18 +3,15 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    public HPBar HPBar { get; set; }
-
+    public HPBar HPBar;
     public TextMeshProUGUI ItemInfoText;
-
-    private void Awake()
-    {
-        GameManager.Instance.UIManager = this;
-    }
+    [SerializeField]
+    private PickUpItemIcon m_PickUpItemIcon;
 
     private void Start()
     {
         GameManager.Instance.Player.Interaction.OnCheckItemEvent += UpdateItemInfoText;
+        GameManager.Instance.Player.Inventory.OnUpdateInventoryEvent += UpdatePickUpItemIcon;
     }
 
     private void UpdateItemInfoText(IInteractable item)
@@ -26,5 +23,11 @@ public class UIManager : MonoBehaviour
         {
             ItemInfoText.text = item.GetItemInfo();
         }
+    }
+
+    //획득한 아이템 표시 갱신
+    private void UpdatePickUpItemIcon(ItemData item)
+    {
+        m_PickUpItemIcon.PickUpItemData = item;
     }
 }

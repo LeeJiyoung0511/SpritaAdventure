@@ -4,16 +4,13 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("이동")]
-    [SerializeField]
-    private float m_MoveSpeed = 5.0f;  //이동속도
-    private Vector2 m_MovementInput;   //입력받은 이동
-    public float m_Drag = 5f;          //감속 (마찰력)
-    public float m_Acceleration = 10f; //가속력
-    public float m_MaxSpeed = 5f;      //최대 이동 속도
+    public float Drag;          //감속 (마찰력)
+    public float Acceleration; // 가속도
+    public float MaxSpeed;      //최대 이동 속도
+    private Vector2 m_MovementInput;   //입력받은 이동값
 
     [Header("점프")]
-    [SerializeField]
-    private float m_JumpPower = 100f; //점프
+    public float JumpPower = 100f; //점프
     [SerializeField]
     private LayerMask m_GroundMask;
 
@@ -35,7 +32,7 @@ public class PlayerController : MonoBehaviour
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Animator = GetComponentInChildren<Animator>();
 
-        m_Rigidbody.drag = m_Drag;
+        m_Rigidbody.drag = Drag;
     }
 
     private void FixedUpdate()
@@ -55,9 +52,9 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = new Vector3(m_MovementInput.x, 0, m_MovementInput.y).normalized;
 
         // 현재 속도가 maxSpeed 이상이면 힘을 추가하지 않음
-        if (m_Rigidbody.velocity.magnitude < m_MaxSpeed)
+        if (m_Rigidbody.velocity.magnitude < MaxSpeed)
         {
-            m_Rigidbody.AddForce(movement * m_Acceleration, ForceMode.Acceleration);
+            m_Rigidbody.AddForce(movement * Acceleration, ForceMode.Acceleration);
         }
     }
 
@@ -78,7 +75,7 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started && IsCheckDown(m_GroundMask))
         {
-            m_Rigidbody.AddForce(Vector2.up * m_JumpPower, ForceMode.Impulse);
+            m_Rigidbody.AddForce(Vector2.up * JumpPower, ForceMode.Impulse);
         }
     }
 

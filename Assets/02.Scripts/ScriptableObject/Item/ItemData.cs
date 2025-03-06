@@ -7,6 +7,8 @@ public class ItemData : ScriptableObject
     public string ItemDesc;
     public ItemType ItemType;
     public GameObject ItemPrefab;
+    public Sprite Sprite;
+    public ItemEffect ItemEffect;
 }
 
 public enum ItemType

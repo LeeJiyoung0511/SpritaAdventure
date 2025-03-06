@@ -17,3 +17,6 @@ MonoBehaviour:
     \uC18D\uB3C4\uAC00 \uC99D\uAC00\uD569\uB2C8\uB2E4."
   ItemType: 1
   ItemPrefab: {fileID: 1626409753219080909, guid: 454f2ca28ac6f574ab27af7aa31cafe8, type: 3}
+  Sprite: {fileID: 21300000, guid: 90818a7b3237a48408927ae954d33d0d, type: 3}
+  CoolTime: 10
+  ItemEffect: {fileID: 11400000, guid: 6feeb6fe616f8b24fb762dffc0526034, type: 2}

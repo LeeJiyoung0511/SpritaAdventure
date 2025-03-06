@@ -15,10 +15,10 @@ TagManager:
   - Ground
   - Consumable
   - JumpPad
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Invincible
+  - Gimmick
+  - Enemy
   - 
   - 
   - 
