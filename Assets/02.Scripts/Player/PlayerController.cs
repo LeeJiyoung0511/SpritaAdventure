@@ -13,7 +13,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("점프")]
     [SerializeField]
-    private float m_JumpPower = 80f; //점프
+    private float m_JumpPower = 100f; //점프
+    [SerializeField]
+    private LayerMask m_GroundMask;
 
     [Header("시선")]
     [SerializeField]
@@ -74,7 +76,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Started)
+        if (context.phase == InputActionPhase.Started && IsCheckDown(m_GroundMask))
         {
             m_Rigidbody.AddForce(Vector2.up * m_JumpPower, ForceMode.Impulse);
         }
@@ -91,5 +93,23 @@ public class PlayerController : MonoBehaviour
         m_CamCurXRot = Mathf.Clamp(m_CamCurXRot, m_MinXLook, m_MaxXLook);
         m_CameraContainer.localEulerAngles = new Vector3(-m_CamCurXRot, 0, 0);
         transform.eulerAngles += new Vector3(0, mouseDelta.x * m_lookSensitivity, 0);
+    }
+
+    public bool IsCheckDown(LayerMask layerMask)
+    {
+        Ray[] rays = new Ray[2]
+        {
+            new Ray(transform.position + (transform.right * 0.1f) + (transform.up * 0.01f), Vector3.down),
+            new Ray(transform.position + (-transform.right * 0.1f) + (transform.up * 0.01f), Vector3.down),
+        };
+
+        for (int i = 0; i < rays.Length; i++)
+        {
+            if (Physics.Raycast(rays[i], 0.1f, layerMask))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

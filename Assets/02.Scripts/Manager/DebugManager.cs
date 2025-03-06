@@ -12,11 +12,11 @@ public class DebugManager : MonoBehaviour
     private void Update()
     {
 #if UNITY_EDITOR
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.F1))
         {
             m_GameManager.Player.Damage(10);
         }
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.F2))
         {
             m_GameManager.Player.Heal(10);
         }

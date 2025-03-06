@@ -24,13 +24,14 @@ public class Player : MonoBehaviour
     private GameManager m_GameManager;
 
     public Interaction Interaction { get; private set; }
-
+    public PlayerController Controller { get; private set; }
 
     private void Awake()
     {
         m_GameManager = GameManager.Instance;
         m_GameManager.Player = this;
         Interaction = GetComponent<Interaction>();
+        Controller = GetComponent<PlayerController>();
     }
 
     private void Start()
