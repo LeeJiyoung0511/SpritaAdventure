@@ -11,9 +11,28 @@ public class Interaction : MonoBehaviour
     private IInteractable m_CheckItem; // 감지한 아이템
     public Action<IInteractable> OnCheckItemEvent = delegate { }; // 아이템 감지 이벤트
 
+    private bool IsMouseInside = false;
+
     private void Start()
     {
         StartCoroutine(ICheckItem());
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButton(0) && IsMouseInside)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.TryGetComponent(out IDropable item))
+                {
+                    item.Drop(hit.point,hit.normal);
+                }
+            }
+        }
     }
 
     private IEnumerator ICheckItem()
@@ -21,8 +40,31 @@ public class Interaction : MonoBehaviour
         while (true)
         {
             CheckItem();
+            MouseCheckItem();
             yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    private void MouseCheckItem()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.collider.TryGetComponent(out IInteractable item))
+            {
+                m_CheckObject = hit.collider.gameObject;
+                m_CheckItem = item;
+                IsMouseInside = true;
+            }
+        }
+        else
+        {
+            NotCheckedItem();
+            IsMouseInside = false;
+        }
+        OnCheckItemEvent?.Invoke(m_CheckItem);
     }
 
     private void CheckItem()

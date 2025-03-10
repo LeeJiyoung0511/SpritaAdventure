@@ -243,9 +243,9 @@ MonoBehaviour:
   JumpPadLayerMask:
     serializedVersion: 2
     m_Bits: 256
-  JumpPower: 30
+  JumpPower: 15
   Spring: {fileID: 1032129278188029748}
   MaxScaleY: 1
   MinScaleY: 0.2
-  ExpandSpeed: 0.7
+  ExpandSpeed: 0.5
   CompressSpeed: 0.3

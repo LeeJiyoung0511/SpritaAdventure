@@ -6,13 +6,14 @@ public class ItemData : ScriptableObject
     public string ItemName;
     public string ItemDesc;
     public ItemType ItemType;
-    public GameObject ItemPrefab;
     public Sprite Sprite;
     public ItemEffect ItemEffect;
+    public GameObject[] DropItemPrefabs;
 }
 
 public enum ItemType
 {
     Equip,
     Consumable,
+    Drop
 }
