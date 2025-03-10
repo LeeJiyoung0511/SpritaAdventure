@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private LayerMask m_GroundMask;
     [SerializeField]
     private LayerMask m_WallMask;
+    public bool IsWallMove = false;
 
     [Header("시선")]
     [SerializeField]
@@ -38,10 +40,27 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
+
+        if (IsWallMove)
+        {
+            if (Input.GetKey(KeyCode.W)) // 위로 이동
+            {
+                m_Rigidbody.velocity = new Vector3(0, 3.0f, 0);
+            }
+            else if (Input.GetKey(KeyCode.S)) // 아래로 이동
+            {
+                m_Rigidbody.velocity = new Vector3(0, -3.0f, 0);
+            }
+            else // 키를 떼면 정지
+            {
+                m_Rigidbody.velocity = Vector3.zero;
+            }
+        }
     }
 
     private void LateUpdate()
     {
+        if (IsWallMove) return;
         CameraLook();
     }
 
@@ -113,6 +132,13 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
+    private bool IsWallTouch()
+    {
+        Ray ray = new Ray(transform.position + Vector3.up * 0.35f, transform.forward);
+        Debug.DrawLine(ray.origin, ray.origin + ray.direction * 0.5f, Color.red);
+        return Physics.Raycast(ray, 0.5f, m_WallMask);
+    }
+
     //대쉬
     public void OnDash(InputAction.CallbackContext context)
     {
@@ -125,6 +151,44 @@ public class PlayerController : MonoBehaviour
         {
             IsDash = false;
             MoveSpeed -= DashAddSpeed;
+        }
+    }
+    public void OnWallMove(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            if (IsWallTouch() && !IsWallMove)
+            {
+                IsWallMove = true;
+                m_Rigidbody.velocity = Vector3.zero;
+                m_Rigidbody.useGravity = false;
+            }
+            else if (IsWallMove)
+            {
+                IsWallMove = false;
+                m_Rigidbody.useGravity = true;
+            }
+        }
+    }
+
+    public void Knockback()
+    {
+        m_MovementInput = Vector2.zero;
+        Vector3 knockbackDirection = (-transform.forward * 1.5f + Vector3.up * 0.5f).normalized;
+        Vector3 targetPosition = m_Rigidbody.position + knockbackDirection * 1f; // 목표 위치 설정
+        StartCoroutine(KnockbackCoroutine(m_Rigidbody, targetPosition, 0.5f)); // 0.5초 동안 서서히 이동
+    }
+
+    IEnumerator KnockbackCoroutine(Rigidbody rb, Vector3 targetPosition, float duration)
+    {
+        float elapsedTime = 0f;
+        Vector3 startPosition = rb.position;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime * 2.0f;
+            rb.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            yield return null;
         }
     }
 }
