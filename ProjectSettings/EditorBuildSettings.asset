@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/00.Scenes/Start.unity
+    guid: cc11b1bc42f4f1d49aa563e7ca12b7e6
+  - enabled: 1
     path: Assets/00.Scenes/InvincibilityItem.unity
     guid: daa8bc8c7399b5f4fa1037551621e3e3
+  - enabled: 1
+    path: Assets/00.Scenes/MouseInteraction.unity
+    guid: e1e4ed7fae60ac344b6d3d05558a8b23
   m_configObjects: {}
