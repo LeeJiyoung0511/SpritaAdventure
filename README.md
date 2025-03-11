@@ -25,7 +25,7 @@
 ## 1.8 플랫폼 발사기
 ![발사대](https://github.com/user-attachments/assets/799f83e0-ff40-45bf-b7fe-d57398eaae2a)
 ## 1.9 AI
-![Uploading AI (online-video-cutter.com).gif…]()
+![AI (online-video-cutter com)](https://github.com/user-attachments/assets/cbd0f566-9a00-451e-97b5-b7e24a23ce5a)
 <br/>
 
 # 2. Technology Stack (기술 스택)
