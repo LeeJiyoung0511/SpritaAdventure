@@ -4,6 +4,7 @@
 - 프로젝트 이름: SpritaAdventure
 - 프로젝트 설명: 유니티 숙련 3D게임개발 과제
 - 제작 기간 :  3/4-3/11 (약 7일간)
+- 조작키 : 
 <br/>
 
 # 1. Key Features (주요 기능)
@@ -20,8 +21,11 @@
 ## 1.6 벽타기
 ![벽타기](https://github.com/user-attachments/assets/dcc10142-b86e-40d4-bbc4-9a7dc1fa3243)
 ## 1.7 레이저 트랩
+![전깃줄](https://github.com/user-attachments/assets/0b5db8b3-ad52-4d75-8165-3481fa635565)
 ## 1.8 플랫폼 발사기
+![발사대](https://github.com/user-attachments/assets/799f83e0-ff40-45bf-b7fe-d57398eaae2a)
 ## 1.9 AI
+![Uploading AI (online-video-cutter.com).gif…]()
 <br/>
 
 # 2. Technology Stack (기술 스택)
