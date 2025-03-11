@@ -153,33 +153,38 @@ public class PlayerController : MonoBehaviour
             MoveSpeed -= DashAddSpeed;
         }
     }
+
+    //벽 이동
     public void OnWallMove(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started)
         {
+            // 벽이 감지되고 벽을 잡지않았다면
             if (IsWallTouch() && !IsWallMove)
             {
                 IsWallMove = true;
-                m_Rigidbody.velocity = Vector3.zero;
-                m_Rigidbody.useGravity = false;
+                m_Rigidbody.velocity = Vector3.zero;   //이동 정지
+                m_Rigidbody.useGravity = false;   //키를 안눌렀을때 미끄러짐을 방지하기위해 중력 비활성화
             }
             else if (IsWallMove)
             {
                 IsWallMove = false;
-                m_Rigidbody.useGravity = true;
+                m_Rigidbody.useGravity = true;   //중력 활성화
             }
         }
     }
 
+    /// 플레이어 넉백
     public void Knockback()
     {
         m_MovementInput = Vector2.zero;
         Vector3 knockbackDirection = (-transform.forward * 1.5f + Vector3.up * 0.5f).normalized;
-        Vector3 targetPosition = m_Rigidbody.position + knockbackDirection * 1f; // 목표 위치 설정
-        StartCoroutine(KnockbackCoroutine(m_Rigidbody, targetPosition, 0.5f)); // 0.5초 동안 서서히 이동
+        Vector3 targetPosition = m_Rigidbody.position + knockbackDirection * 2f; // 목표 위치 설정
+        StartCoroutine(IKnockback(m_Rigidbody, targetPosition, 0.5f)); // 0.5초 동안 서서히 이동
     }
 
-    IEnumerator KnockbackCoroutine(Rigidbody rb, Vector3 targetPosition, float duration)
+    //넉백을 부드럽게
+    private IEnumerator IKnockback(Rigidbody rb, Vector3 targetPosition, float duration)
     {
         float elapsedTime = 0f;
         Vector3 startPosition = rb.position;
@@ -187,7 +192,7 @@ public class PlayerController : MonoBehaviour
         while (elapsedTime < duration)
         {
             elapsedTime += Time.deltaTime * 2.0f;
-            rb.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            rb.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);   //부드럽게 이동
             yield return null;
         }
     }

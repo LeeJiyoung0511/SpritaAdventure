@@ -7,6 +7,7 @@ public class Invincible : ItemEffect
     {
         //레이어를 무적 상태로 변경
         player.gameObject.layer  = LayerMask.NameToLayer("Invincible");
+        player.ActivateInvincibility(Duration);
     }
 
     public override void EndEffect(Player player)

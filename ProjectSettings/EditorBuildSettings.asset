@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/00.Scenes/InvincibilityItem.unity
+    guid: daa8bc8c7399b5f4fa1037551621e3e3
   m_configObjects: {}
