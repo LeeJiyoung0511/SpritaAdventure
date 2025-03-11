@@ -247,5 +247,5 @@ MonoBehaviour:
   Spring: {fileID: 1032129278188029748}
   MaxScaleY: 1
   MinScaleY: 0.2
-  ExpandSpeed: 0.5
+  ExpandSpeed: 0.8
   CompressSpeed: 0.3
