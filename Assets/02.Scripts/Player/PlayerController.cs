@@ -33,10 +33,15 @@ public class PlayerController : MonoBehaviour
     private Rigidbody m_Rigidbody;
     private Animator m_Animator;
 
+    private Vector3 m_StartPos;
+
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Animator = GetComponentInChildren<Animator>();
+
+        //처음 위치 저장
+        m_StartPos = transform.localPosition;
     }
 
     private void FixedUpdate()
@@ -44,21 +49,13 @@ public class PlayerController : MonoBehaviour
         if (m_IsRiding) return;
 
         Move();
+        WallMove();
 
-        if (IsWallMove)
+        //낙하시 처음 위치로 리스폰
+        if (m_Rigidbody.velocity.y < -20.0f)
         {
-            if (Input.GetKey(KeyCode.W)) // 위로 이동
-            {
-                m_Rigidbody.velocity = new Vector3(0, 3.0f, 0);
-            }
-            else if (Input.GetKey(KeyCode.S)) // 아래로 이동
-            {
-                m_Rigidbody.velocity = new Vector3(0, -3.0f, 0);
-            }
-            else // 키를 떼면 정지
-            {
-                m_Rigidbody.velocity = Vector3.zero;
-            }
+            m_Rigidbody.velocity = Vector3.zero;
+            transform.position = m_StartPos;
         }
     }
 
@@ -148,7 +145,8 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-    private bool IsWallTouch()
+    //벽 체크
+    private bool IsCheckWall()
     {
         Ray ray = new Ray(transform.position + Vector3.up * 0.35f, transform.forward);
         Debug.DrawLine(ray.origin, ray.origin + ray.direction * 0.5f, Color.red);
@@ -176,7 +174,7 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Started)
         {
             // 벽이 감지되고 벽을 잡지않았다면
-            if (IsWallTouch() && !IsWallMove)
+            if (IsCheckWall() && !IsWallMove)
             {
                 IsWallMove = true;
                 m_Rigidbody.velocity = Vector3.zero;   //이동 정지
@@ -190,6 +188,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //벽 이동
+    private void WallMove()
+    {
+        if (IsWallMove)
+        {
+            if (Input.GetKey(KeyCode.W)) // 위로 이동
+            {
+                m_Rigidbody.velocity = new Vector3(0, 3.0f, 0);
+            }
+            else if (Input.GetKey(KeyCode.S)) // 아래로 이동
+            {
+                m_Rigidbody.velocity = new Vector3(0, -3.0f, 0);
+            }
+            else // 키를 떼면 정지
+            {
+                m_Rigidbody.velocity = Vector3.zero;
+            }
+        }
+    }
+
+    //발사기 탑승
     public void RideLancher()
     {
         m_IsRiding = true;
