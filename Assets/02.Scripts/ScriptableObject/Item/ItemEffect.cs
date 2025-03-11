@@ -11,6 +11,7 @@ public abstract class ItemEffect : ScriptableObject
     public virtual void ApplyEffect(Player player)
     {
         player.StartCoroutine(IApplyEffect(player));
+        GameManager.Instance.UIManager.PlayCoolDownAnimation(Duration);
     }
     //효과 시작
     public abstract void StartEffect(Player player);
