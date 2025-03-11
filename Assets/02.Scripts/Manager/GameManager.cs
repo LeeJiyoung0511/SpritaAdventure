@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     private static GameManager m_Instance;
 
     public Player Player { get; set; }
-    public UIManager UIManager;
+    public UIManager UIManager { get; set; }
 
     private void Awake()
     {

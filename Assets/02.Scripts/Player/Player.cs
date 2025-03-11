@@ -34,14 +34,13 @@ public class Player : MonoBehaviour
 
         Hp = new(MaxHp);
         Stamina = new(MaxStamina);
+        m_BaseColor = m_Renderer.material.color;
     }
 
     private void Start()
     {
         m_GameManager.UIManager.HPBar.Set(MaxHp);
         m_GameManager.UIManager.StaminaBar.Set(MaxStamina);
-
-        m_BaseColor = m_Renderer.material.color;
     }
 
     private void Update()

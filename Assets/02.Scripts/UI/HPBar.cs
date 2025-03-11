@@ -1,8 +1,8 @@
 public class HPBar : BarBase
 {
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         GameManager.Instance.Player.Hp.OnChangedConditionEvent += UpdateBar;
     }
 }

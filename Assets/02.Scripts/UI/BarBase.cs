@@ -5,7 +5,7 @@ public class BarBase : MonoBehaviour
 {
     private Slider m_Bar;
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         m_Bar = GetComponent<Slider>();
     }

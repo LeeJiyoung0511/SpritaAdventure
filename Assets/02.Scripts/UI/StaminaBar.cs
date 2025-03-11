@@ -1,8 +1,8 @@
 public class StaminaBar : BarBase
 {
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         GameManager.Instance.Player.Stamina.OnChangedConditionEvent += UpdateBar;
     }
 }

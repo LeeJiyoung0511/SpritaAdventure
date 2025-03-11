@@ -10,8 +10,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private PickUpItemIcon m_PickUpItemIcon;
 
-    private void Start()
+    private void Awake()
     {
+        GameManager.Instance.UIManager = this;
         GameManager.Instance.Player.Interaction.OnCheckItemEvent += UpdateItemInfoText;
         GameManager.Instance.Player.Inventory.OnUpdateInventoryEvent += UpdatePickUpItemIcon;
     }
@@ -20,10 +21,13 @@ public class UIManager : MonoBehaviour
     {
         bool isShow = item != null;
 
-        m_ItemInfoText.gameObject.SetActive(isShow);
         if (isShow)
         {
             m_ItemInfoText.text = item.GetItemInfo();
+        }
+        else
+        {
+            m_ItemInfoText.text =string.Empty;
         }
     }
 
