@@ -13,8 +13,10 @@
 ![대쉬](https://github.com/user-attachments/assets/1aef561e-03f0-4cdd-9830-1fb8b39dc5fd)
 ## 1.3 아이템 상호작용 및 사용
 ![아이템 사용](https://github.com/user-attachments/assets/c464b68c-1159-487e-bf4b-1c905eadc6b0)
-## 1.4 점프대
+ 1.4 점프대
+##![점프대](https://github.com/user-attachments/assets/20d8a386-8961-4f58-9bd5-f740787cb1d8)
 ## 1.5 움직이는 플랫폼
+![움직이는 발판](https://github.com/user-attachments/assets/e7f56228-35df-4bb8-85b7-870b276ad771)
 ## 1.6 벽타기
 ## 1.7 레이저 트랩
 ## 1.8 플랫폼 발사기
