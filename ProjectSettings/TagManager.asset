@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - JumpPad
   layers:
   - Default
   - TransparentFX
@@ -11,15 +12,15 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Consumable
+  - JumpPad
+  - Player
+  - Invincible
+  - Gimmick
+  - Enemy
+  - Wall
+  - Drop
   - 
   - 
   - 

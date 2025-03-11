@@ -4,5 +4,32 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/00.Scenes/Start.unity
+    guid: cc11b1bc42f4f1d49aa563e7ca12b7e6
+  - enabled: 1
+    path: Assets/00.Scenes/InvincibilityItem.unity
+    guid: daa8bc8c7399b5f4fa1037551621e3e3
+  - enabled: 1
+    path: Assets/00.Scenes/MouseInteraction.unity
+    guid: e1e4ed7fae60ac344b6d3d05558a8b23
+  - enabled: 1
+    path: Assets/00.Scenes/ElectricWire.unity
+    guid: b001e0b05982b3945a14507546d52bd8
+  - enabled: 1
+    path: Assets/00.Scenes/JumpPad.unity
+    guid: 6c892242961834341b341549f4d1200c
+  - enabled: 1
+    path: Assets/00.Scenes/MoveGround.unity
+    guid: 8d9e509cd89c4344fb8de695fc0958af
+  - enabled: 1
+    path: Assets/00.Scenes/WallMove.unity
+    guid: c218a715c8a1af340b6a51d60491f4d3
+  - enabled: 1
+    path: Assets/00.Scenes/Launcher.unity
+    guid: 1f5bf243645c5de4eab46abfa8a63746
+  - enabled: 1
+    path: Assets/00.Scenes/Move.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}
