@@ -37,6 +37,7 @@ public class UIManager : MonoBehaviour
         m_PickUpItemIcon.PickUpItemData = item;
     }
 
+    //쿨다운 애니메이션 재생
     public void PlayCoolDownAnimation(float duration)
     {
         m_PickUpItemIcon.PlayPlayCoolDownAnimation(duration);

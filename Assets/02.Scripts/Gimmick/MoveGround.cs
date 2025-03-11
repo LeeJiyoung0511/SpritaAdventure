@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveGround : MonoBehaviour
 {
-    public float MoveSpeed;
-    public float MoveDistance;
+    public float MoveSpeed; //이동속도
+    public float MoveDistance; //이동거리
 
-    private float m_StartZ;
+    private float m_StartZ; //시작위치Z
 
     private void Start()
     {

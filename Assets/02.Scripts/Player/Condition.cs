@@ -23,7 +23,7 @@ public class Condition
 
     private float m_Current;
 
-    public Action<float> OnChangedConditionEvent = delegate { };
+    public Action<float> OnChangedConditionEvent = delegate { }; //Current값이 갱신됐을때 호출되는 함수
 
     public void Add(float amount)
     {

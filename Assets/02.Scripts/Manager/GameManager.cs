@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,7 +10,6 @@ public class GameManager : MonoBehaviour
             if (m_Instance == null)
             {
                 m_Instance = new GameObject("GameManager").AddComponent<GameManager>();
-                m_Instance.AddComponent<DebugManager>();
             }
             return m_Instance;
         }
@@ -26,14 +24,10 @@ public class GameManager : MonoBehaviour
         if (m_Instance == null)
         {
             m_Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
         }
     }
 
+    //시작화면으로 이동
     public void MoveStartScene()
     {
         SceneManager.LoadScene("Start");

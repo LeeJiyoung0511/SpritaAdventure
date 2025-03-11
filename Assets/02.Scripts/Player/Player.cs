@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
 
         while (elapsedTime < duration)
         {
-            m_Renderer.material.color = new Color(Random.value, Random.value, Random.value);
+            m_Renderer.material.color = new Color(Random.value, Random.value, Random.value); // 색깔 랜덤 설정
             yield return new WaitForSeconds(ColorChangeTime); // 일정 간격으로 변경
             elapsedTime += ColorChangeTime;
         }

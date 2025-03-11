@@ -8,6 +8,7 @@ public class MouseInteraction : Interaction
     {
         CheckItem();
 
+        //오브젝트안에 마우스가 있고 마우스 왼쪽 버튼 클릭하면
         if (Input.GetMouseButton(0) && IsMouseInside)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -17,6 +18,7 @@ public class MouseInteraction : Interaction
             {
                 if (hit.collider.TryGetComponent(out IDropable item))
                 {
+                    // 아이템 드롭
                     item.Drop(hit.point, hit.normal);
                 }
             }
