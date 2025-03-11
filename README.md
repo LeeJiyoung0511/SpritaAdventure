@@ -8,6 +8,7 @@
 
 # 1. Key Features (주요 기능)
 ## 1.1 이동 및 점프
+![이동 및 점프](https://github.com/user-attachments/assets/31ef7755-b657-4d9e-964d-0113599b967e)
 ## 1.2 대쉬
 ## 1.3 아이템 상호작용 및 사용
 ## 1.4 점프대
