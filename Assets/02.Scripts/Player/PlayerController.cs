@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     private float m_lookSensitivity = 0.1f; // 카메라 민감도
     private Vector2 mouseDelta;  // 마우스 변화값
 
+    private bool m_IsRiding;
+
     private Rigidbody m_Rigidbody;
     private Animator m_Animator;
 
@@ -39,6 +41,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (m_IsRiding) return;
+
         Move();
 
         if (IsWallMove)
@@ -60,7 +64,7 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (IsWallMove) return;
+        if (IsWallMove || m_IsRiding) return;
         CameraLook();
     }
 
@@ -97,7 +101,19 @@ public class PlayerController : MonoBehaviour
             {
                 m_Rigidbody.AddForce(Vector2.up * JumpPower, ForceMode.Impulse);
             }
+            else if (m_IsRiding)
+            {
+                m_Rigidbody.useGravity = true;
+                m_Rigidbody.AddForce(transform.forward * 20f + transform.up * 10.0f, ForceMode.VelocityChange);
+                //TODO:더 좋은 방법 찾아보기
+                Invoke(nameof(DisableRiding), 2.5f); // 2.5초 후에 비활성화
+            }
         }
+    }
+
+    private void DisableRiding()
+    {
+        m_IsRiding = false;
     }
 
     public void OnLookInput(InputAction.CallbackContext context)
@@ -174,6 +190,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void RideLancher()
+    {
+        m_IsRiding = true;
+        m_MovementInput = Vector2.zero;
+        m_Rigidbody.useGravity = false;
+        m_Rigidbody.velocity = Vector3.zero; // 속도 초기화
+        m_Rigidbody.angularVelocity = Vector3.zero; // 회전 속도 초기화
+    }
+
     /// 플레이어 넉백
     public void Knockback()
     {
@@ -195,5 +220,6 @@ public class PlayerController : MonoBehaviour
             rb.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);   //부드럽게 이동
             yield return null;
         }
+        m_Rigidbody.useGravity = true;
     }
 }
