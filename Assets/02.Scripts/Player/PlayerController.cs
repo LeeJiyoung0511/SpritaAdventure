@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
         get => m_IsDash;
         set
         {
+            if (m_IsDash == value) return; // 중복 변경 방지
             m_IsDash = value;
             if (m_IsDash)
             {
@@ -102,6 +103,8 @@ public class PlayerController : MonoBehaviour
         {
             m_MovementInput = Vector2.zero;
             IsMove = false;
+
+            if(IsDash) IsDash = false;
         }
     }
 
@@ -172,11 +175,11 @@ public class PlayerController : MonoBehaviour
     //대쉬
     public void OnDash(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed && !IsDash && IsMove)
+        if (IsMove && context.phase == InputActionPhase.Performed && !IsDash)
         {
             IsDash = true;
         }
-        else if (context.phase == InputActionPhase.Canceled && IsDash && IsMove)
+        else if (IsMove && context.phase == InputActionPhase.Canceled)
         {
             IsDash = false;
         }
