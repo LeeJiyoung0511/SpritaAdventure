@@ -9,7 +9,23 @@ public class PlayerController : MonoBehaviour
     public float DashAddSpeed = 10.0f; //대쉬중일때 더할 속도값
     private Vector2 m_MovementInput;   //입력받은 이동값
     private bool IsMove = false; // 이동중인지
-    public bool IsDash = false; // 대쉬중인지
+    public bool IsDash // 대쉬중인지 
+    {
+        get => m_IsDash;
+        set
+        {
+            m_IsDash = value;
+            if (m_IsDash)
+            {
+                MoveSpeed += DashAddSpeed;
+            }
+            else
+            {
+                MoveSpeed -= DashAddSpeed;
+            }
+        }
+    } 
+    private bool m_IsDash = false;
 
     [Header("점프")]
     public float JumpPower = 100f; //점프
@@ -159,12 +175,10 @@ public class PlayerController : MonoBehaviour
         if (context.phase == InputActionPhase.Performed && !IsDash && IsMove)
         {
             IsDash = true;
-            MoveSpeed += DashAddSpeed;
         }
-        else if (context.phase == InputActionPhase.Canceled && IsMove)
+        else if (context.phase == InputActionPhase.Canceled && IsDash && IsMove)
         {
             IsDash = false;
-            MoveSpeed -= DashAddSpeed;
         }
     }
 

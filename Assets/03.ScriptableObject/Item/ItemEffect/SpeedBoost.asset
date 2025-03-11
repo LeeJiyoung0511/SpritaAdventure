@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: SpeedBoost
   m_EditorClassIdentifier: 
   Duration: 5
-  IsStartEffect: 0
-  AddSpeed: 10
+  AddSpeed: 3

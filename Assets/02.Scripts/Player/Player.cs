@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
 
     public bool IsDead => Hp.Current == 0;
 
+    public bool IsCanDash => Stamina.Current >= 5;
+
     private GameManager m_GameManager;
 
     public Interaction Interaction { get; private set; }
@@ -50,6 +52,12 @@ public class Player : MonoBehaviour
         {
             //스태미너 감소
             Stamina.Subtract(Time.deltaTime * 5f);
+
+            if (Stamina.Current == 0f)
+            {
+                Controller.IsDash = false;
+            }
+
         }
         else
         {
