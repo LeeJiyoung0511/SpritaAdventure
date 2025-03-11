@@ -10,7 +10,9 @@
 ## 1.1 이동 및 점프
 ![이동 및 점프](https://github.com/user-attachments/assets/31ef7755-b657-4d9e-964d-0113599b967e)
 ## 1.2 대쉬
+![대쉬](https://github.com/user-attachments/assets/1aef561e-03f0-4cdd-9830-1fb8b39dc5fd)
 ## 1.3 아이템 상호작용 및 사용
+![아이템 사용](https://github.com/user-attachments/assets/c464b68c-1159-487e-bf4b-1c905eadc6b0)
 ## 1.4 점프대
 ## 1.5 움직이는 플랫폼
 ## 1.6 벽타기
