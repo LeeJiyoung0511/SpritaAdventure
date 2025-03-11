@@ -4,10 +4,17 @@
 - 프로젝트 이름: SpritaAdventure
 - 프로젝트 설명: 유니티 숙련 3D게임개발 과제
 - 제작 기간 :  3/4-3/11 (약 7일간)
-- 조작키 : 
 <br/>
 
-# 1. Key Features (주요 기능)
+# 1. Operation keys (조작키)
+- 이동 : 키보드 방향키
+- 점프,발사 : Space
+- 아이템 사용 : Left Shift
+- 벽잡기,벽놓기 : Ctrl
+- 벽타기 : 키보드 위아래 방향키 
+<br/>
+
+# 2. Key Features (주요 기능)
 ## 1.1 이동 및 점프
 ![이동 및 점프](https://github.com/user-attachments/assets/31ef7755-b657-4d9e-964d-0113599b967e)
 ## 1.2 대쉬
@@ -28,7 +35,7 @@
 ![AI (online-video-cutter com)](https://github.com/user-attachments/assets/cbd0f566-9a00-451e-97b5-b7e24a23ce5a)
 <br/>
 
-# 2. Technology Stack (기술 스택)
+# 3. Technology Stack (기술 스택)
 ## 2.1 Language
 |  |  |
 |-----------------|-----------------|
