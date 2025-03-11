@@ -18,6 +18,7 @@
 ## 1.5 움직이는 플랫폼
 ![움직이는 발판](https://github.com/user-attachments/assets/e7f56228-35df-4bb8-85b7-870b276ad771)
 ## 1.6 벽타기
+![벽타기](https://github.com/user-attachments/assets/dcc10142-b86e-40d4-bbc4-9a7dc1fa3243)
 ## 1.7 레이저 트랩
 ## 1.8 플랫폼 발사기
 ## 1.9 AI
