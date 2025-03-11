@@ -210,11 +210,11 @@ public class PlayerController : MonoBehaviour
     {
         if (IsWallMove)
         {
-            if (Input.GetKey(KeyCode.W)) // 위로 이동
+            if (Input.GetKey(KeyCode.UpArrow)) // 위로 이동
             {
                 m_Rigidbody.velocity = new Vector3(0, 3.0f, 0);
             }
-            else if (Input.GetKey(KeyCode.S)) // 아래로 이동
+            else if (Input.GetKey(KeyCode.DownArrow)) // 아래로 이동
             {
                 m_Rigidbody.velocity = new Vector3(0, -3.0f, 0);
             }
